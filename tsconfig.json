@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "hooks/useInterval.js"  ],
   "exclude": [
     "node_modules"
   ]
