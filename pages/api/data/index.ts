@@ -1,20 +1,20 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface Data {
-    timestamp: Number,
-    value: Number
+    timestamp: Date;
+    value: Number;
 }
 
 let data: Data[] = [];
 data.push({
-    timestamp: 1,
-    value: 27.5
-})
+    timestamp: new Date(),
+    value: 27.5,
+});
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const httpMethod = req.method;
 
-    switch(httpMethod) {
+    switch (httpMethod) {
         case 'GET':
             res.status(200).json(data);
             break;
@@ -22,13 +22,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             handlePost(req, res);
             break;
         default:
-            res.status(405).json({message: "not supported"});
+            res.status(405).json({ message: 'not supported' });
     }
-}
+};
 
 const handlePost = (req: NextApiRequest, res: NextApiResponse) => {
-    const {timestamp, value} = req.body;
+    const { payload } = req.body;
     console.log(req.body);
-    data.push({timestamp, value});
-    return res.status(200).json({message: "post", timestamp, value});
-}
+
+    if (payload.length > 0) {
+        for (let item of payload) {
+            data.push({ timestamp: new Date(), value: item });
+        }
+    }
+    return res.status(200).json({ message: 'post', payload });
+};
