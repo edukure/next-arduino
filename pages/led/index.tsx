@@ -39,7 +39,7 @@ export default function Led() {
     // }, []);
 
     const fetchServerColor = async () => {
-        const response = await fetch('http://next-arduino.edukure.vercel.app/api/rgb');
+        const response = await fetch('https://next-arduino.edukure.vercel.app/api/rgb');
         const data = await response.json();
         if (serverColor != data.color) {
             setServerColor(data.color);
@@ -52,7 +52,7 @@ export default function Led() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ newColor: color }),
         };
-        const response = await fetch('http://next-arduino.edukure.vercel.app/api/rgb', options);
+        const response = await fetch('https://next-arduino.edukure.vercel.app/api/rgb', options);
         const data = await response.json();
     };
 
