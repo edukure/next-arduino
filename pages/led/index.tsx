@@ -21,7 +21,7 @@ export default function Led() {
     }, 5000);
 
     const fectchServerColor = async () => {
-        const response = await fetch('http://localhost:3000/api/rgb');
+        const response = await fetch('edukure.me/api/rgb');
         const data = await response.json();
         if (serverColor != data.color) {
             setServerColor(data.color);
@@ -34,7 +34,7 @@ export default function Led() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ newColor: color })
         }
-        const response = await fetch("http://localhost:3000/api/rgb", options);
+        const response = await fetch("edukure.me/api/rgb", options);
         const data = await response.json();
     }
 
