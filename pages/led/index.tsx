@@ -7,36 +7,11 @@ import LedOn from '../../assets/led-on.svg';
 
 export default function Led() {
     const [color, setColor] = useState('#453ba5');
-    const [prevColor, setPrevColor] = useState('');
     const [serverColor, setServerColor] = useState('');
-
-    let currentColor = '';
-
-    //#20b2aa'
-
-    // setInterval(async () => {
-    //     const response = await fetch('http://localhost:3000/api/led');
-    //     const data = await response.json();
-    //     setState(data.state);
-    // }, 1000);
-
-    // const interval = setInterval(async () => {
-    //     await fetchServerColor();
-    //     await postNewColor(color);
-    // }, 5000);
 
     useInterval(async () => {
         await fetchServerColor();
-
-        // if (prevColor !== color) {
-        //     await postNewColor(color);
-        //     setPrevColor(color);
-        // }
     }, 5000);
-
-    // useEffect(() => {
-    //     return clearInterval(interval);
-    // }, []);
 
     const fetchServerColor = async () => {
         const response = await fetch('https://next-arduino.edukure.vercel.app/api/rgb');
